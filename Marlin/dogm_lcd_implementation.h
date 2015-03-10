@@ -96,8 +96,12 @@ U8GLIB_NHD_C12864 u8g(DOGLCD_CS, DOGLCD_A0);
 // Mini Viki and Viki 2.0 LCD, ST7565 controller as well
 U8GLIB_NHD_C12864 u8g(DOGLCD_CS, DOGLCD_A0);
 #else
-// for regular DOGM128 display with HW-SPI
-U8GLIB_DOGM128 u8g(DOGLCD_CS, DOGLCD_A0);  // HW-SPI Com: CS, A0
+	// for regular DOGM128 display with HW-SPI OR KS0108
+	#ifdef U8GLIB_KS0108_SPI
+		U8GLIB_KS0108_128 u8g(DOGLCD_CLK, DOGLCD_MOSI, DOGLCD_CS, DOGLCD_A0);	// HW-SPI Com: CS, A0
+	#else
+		U8GLIB_DOGM128 u8g(DOGLCD_CS, DOGLCD_A0);  // HW-SPI Com: CS, A0
+	#endif
 #endif
 
 static void lcd_implementation_init()

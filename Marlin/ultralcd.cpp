@@ -376,7 +376,7 @@ static void lcd_main_menu()
         MENU_ITEM(submenu, MSG_DELTA_CALIBRATE, lcd_delta_calibrate_menu);
 #endif // DELTA_CALIBRATION_MENU
     }
-/*JFR TEST*/            MENU_ITEM(gcode, "test multiline", PSTR("G4 S3\nM104 S50\nG4 S1\nM104 S200\nG4 S2\nM104 S0"));  // SD-card changed by user
+//MENU_ITEM(gcode, "test multiline", PSTR("G4 S3\nM104 S50\nG4 S1\nM104 S200\nG4 S2\nM104 S0"));  // SD-card changed by user
     MENU_ITEM(submenu, MSG_CONTROL, lcd_control_menu);
 #ifdef SDSUPPORT
     if (card.cardOK)
@@ -678,12 +678,15 @@ static void lcd_prepare_menu()
 {
     START_MENU();
     MENU_ITEM(back, MSG_MAIN, lcd_main_menu);
+	MENU_ITEM(submenu, MSG_MOVE_AXIS, lcd_move_menu);
+    MENU_ITEM(gcode, MSG_DISABLE_STEPPERS, PSTR("M84"));
+    MENU_ITEM(function, MSG_COOLDOWN, lcd_cooldown);
+	
 #ifdef SDSUPPORT
     #ifdef MENU_ADDAUTOSTART
       MENU_ITEM(function, MSG_AUTOSTART, lcd_autostart_sd);
     #endif
 #endif
-    MENU_ITEM(gcode, MSG_DISABLE_STEPPERS, PSTR("M84"));
     MENU_ITEM(gcode, MSG_AUTO_HOME, PSTR("G28"));
     MENU_ITEM(function, MSG_SET_HOME_OFFSETS, lcd_set_home_offsets);
     //MENU_ITEM(gcode, MSG_SET_ORIGIN, PSTR("G92 X0 Y0 Z0"));
@@ -696,7 +699,7 @@ static void lcd_prepare_menu()
     MENU_ITEM(function, MSG_PREHEAT_ABS, lcd_preheat_abs0);
   #endif
 #endif
-    MENU_ITEM(function, MSG_COOLDOWN, lcd_cooldown);
+
 #if PS_ON_PIN > -1
     if (powersupply)
     {
@@ -705,7 +708,7 @@ static void lcd_prepare_menu()
         MENU_ITEM(gcode, MSG_SWITCH_PS_ON, PSTR("M80"));
     }
 #endif
-    MENU_ITEM(submenu, MSG_MOVE_AXIS, lcd_move_menu);
+    
 		
     // JFR for RMud delta printer
     MENU_ITEM(gcode, "Calibrate bed", PSTR("M702\nG28\nG1 X-77.94 Y-45 Z36 F8000\nG4 S3\nM701 P0\nG1 X77.94 Y-45 Z36\nG4 S3\nM701 P1\nG1 X0 Y90 Z36\nG4 S3\nM701 P2\nM700\nG1 X0 Y0 Z100 F8000"));
@@ -827,7 +830,7 @@ static void lcd_control_menu()
 
 #ifdef DOGLCD
 //    MENU_ITEM_EDIT(int3, MSG_CONTRAST, &lcd_contrast, 0, 63);
-    MENU_ITEM(submenu, MSG_CONTRAST, lcd_set_contrast);
+//    MENU_ITEM(submenu, MSG_CONTRAST, lcd_set_contrast);
 #endif
 #ifdef FWRETRACT
     MENU_ITEM(submenu, MSG_RETRACT, lcd_control_retract_menu);

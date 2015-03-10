@@ -34,7 +34,7 @@
 #endif
 
 #define PROTOCOL_VERSION "1.0"
-#define FIRMWARE_URL "https://github.com/MarlinFirmware/Marlin"
+#define FIRMWARE_URL "http://flucher.eu"
 
 #if MB(ULTIMAKER)|| MB(ULTIMAKER_OLD)|| MB(ULTIMAIN_2)
   #define MACHINE_NAME "Ultimaker"
@@ -45,7 +45,7 @@
   #define MACHINE_NAME "3Drag"
   #define FIRMWARE_URL "http://3dprint.elettronicain.it/"
 #elif MB(K8200)
-  #define MACHINE_NAME "K8200"
+  #define MACHINE_NAME "K8200-MFL"
 #elif MB(5DPRINT)
   #define MACHINE_NAME "Makibox"
 #elif MB(SAV_MKI)

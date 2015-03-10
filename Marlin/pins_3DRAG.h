@@ -22,18 +22,29 @@
 
 #define HEATER_BED_PIN     9    // BED
 
+#define PS_ON_PIN -1
+
 #if defined(ULTRA_LCD) && defined(NEWPANEL)
-  #define BEEPER -1
+	#define LCD_PINS_RS 27
+	#define LCD_PINS_ENABLE 29
+	#define LCD_PINS_D4 37
+	#define LCD_PINS_D5 35
+	#define LCD_PINS_D6 33
+	#define LCD_PINS_D7 31
+  
 
-  #define LCD_PINS_RS 27
-  #define LCD_PINS_ENABLE 29
-  #define LCD_PINS_D4 37
-  #define LCD_PINS_D5 35
-  #define LCD_PINS_D6 33
-  #define LCD_PINS_D7 31
+	#define BEEPER -1 	//-> Beeper deactivated 
 
-  // Buttons
-  #define BTN_EN1 16
-  #define BTN_EN2 17
-  #define BTN_ENC 23 //the click
+	#define DOGLCD_A0  37
+	#define DOGLCD_CS  29
+	#define DOGLCD_MOSI 35	//Software SPI for LCD
+	#define DOGLCD_CLK	33	//Software SPI for LCD
+
+	//buttons
+	#define BTN_EN1 16
+	#define BTN_EN2 17
+	#define BTN_ENC 23  //the click
+
+	#define LCD_SCREEN_ROT_180	//rotate display by 180°
+		
 #endif // ULTRA_LCD && NEWPANEL
