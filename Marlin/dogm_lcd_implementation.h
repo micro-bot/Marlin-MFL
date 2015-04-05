@@ -379,7 +379,7 @@ void lcd_implementation_drawedit(const char* pstr, char* value) {
   uint8_t rows = 1;
   uint8_t lcd_width = LCD_WIDTH;
   uint8_t char_width = DOG_CHAR_WIDTH;
-
+   
   #ifdef USE_BIG_EDIT_FONT
     if (lcd_strlen_P(pstr) <= LCD_WIDTH_EDIT - 1) {
       u8g.setFont(FONT_MENU_EDIT);
