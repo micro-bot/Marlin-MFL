@@ -100,7 +100,7 @@ static void menu_action_setting_edit_callback_long5(const char* pstr, unsigned l
 
 #if !defined(LCD_I2C_VIKI)
   #ifndef ENCODER_STEPS_PER_MENU_ITEM
-    #define ENCODER_STEPS_PER_MENU_ITEM 5
+    #define ENCODER_STEPS_PER_MENU_ITEM 1
   #endif
   #ifndef ENCODER_PULSES_PER_STEP
     #define ENCODER_PULSES_PER_STEP 1
@@ -1609,7 +1609,19 @@ void lcd_buttons_update()
     uint8_t enc=0;
     if (buttons & EN_A) enc |= B01;
     if (buttons & EN_B) enc |= B10;
-    if(enc != lastEncoderBits)
+    
+	newbutton = ~(~lastEncoderBits ^ enc);  //there is a 1 in the byte if an edge occurred on the respective pin
+	if (newbutton & B01 && buttons & B01)	//if EN_A detected a edge && changed to positive direction  => pos edge detected
+	{
+		if (enc & B10)						//EN_B give the direction of counting
+			encoderDiff++;
+		else 
+			encoderDiff--;
+	}	
+	lastEncoderBits = enc;	
+	
+#ifdef OLDENCODER
+	if(enc != lastEncoderBits)
     {
         switch(enc)
         {
@@ -1640,6 +1652,7 @@ void lcd_buttons_update()
         }
     }
     lastEncoderBits = enc;
+#endif
 }
 
 bool lcd_detected(void)
